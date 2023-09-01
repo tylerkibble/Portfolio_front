@@ -1,5 +1,5 @@
 module.exports = mongoose => {
-  const Tutorial = mongoose.model(
+  const doc = mongoose.model(
     "mydatabase",
     mongoose.Schema(
       {
@@ -11,5 +11,5 @@ module.exports = mongoose => {
     )
   );
 
-  return Tutorial;
+  return doc;
 };
