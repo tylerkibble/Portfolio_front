@@ -6,7 +6,14 @@ const router = Router();
 router.get('/', async (req, res) => {
     try {
         const projectList = await Project.find()
-        if (!projectList) throw new Error('No Project List found')
+        if (!projectList) {
+            const projectList = await fetch('https://api.github.com/users/tylerkibble/repos')
+                .then(response => response.json)
+                .then(json => projectList = json)
+                .catch(error => console.error('Error', error));
+                
+        }
+        // throw new Error('No Project List found')
         res.status(200).json(projectList)
     } catch (error) {
         res.status(500).json({ message: error.message })
