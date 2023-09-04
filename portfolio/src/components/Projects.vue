@@ -1,4 +1,3 @@
-<!-- Cards.vue -->
 <template>
   <v-container v-if="showCards">
     <v-row>
@@ -10,15 +9,12 @@
         v-for="item in repos"
         :key="item.id"
       >
-        <v-card class="pa-3" outlined>
-          <v-img
-            :src="item.owner.avatar_url"
-            height="200px"
-          ></v-img>
+        <v-card class="pa-3 d-flex flex-column card-outter" outlined height="100%">
+          <v-img :src="item.owner.avatar_url" max-height="35%"></v-img>
           <v-card-title>{{ item.name }}</v-card-title>
           <v-card-subtitle>{{ item.full_name }}</v-card-subtitle>
-          <v-card-text>{{ item.description }}</v-card-text>
-          <v-card-actions>
+          <v-card-text class="mb-4">{{ item.description }}</v-card-text>
+          <v-card-actions class="card-actions">
             <v-btn
               color="blue"
               text
@@ -34,6 +30,7 @@
   </v-container>
 </template>
 
+
 <script lang="ts" setup>
 // import { defineProps } from 'vue';
 
@@ -43,4 +40,18 @@ const props = defineProps({
 });
 </script>
 
-<style></style>
+<style>
+.card-outter {
+  padding-bottom: 50px;
+}
+
+.card-actions {
+  position: absolute;
+  bottom: 0;
+}
+
+.mb-4 {
+  margin-bottom: 16px; /* Adjust the value as needed */
+}
+
+</style>

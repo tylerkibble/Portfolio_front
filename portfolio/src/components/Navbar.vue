@@ -42,6 +42,7 @@ async function getRepos() {
   const json = await response.json();
   repos.value = json;
   showCards.value = true;
+  console.log(json)
 }
 </script>
 
