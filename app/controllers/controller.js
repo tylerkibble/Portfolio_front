@@ -143,3 +143,9 @@ exports.findAllPublished = (req, res) => {
     });
     return res.data
 };
+
+// Find all Github Repos from the github api then save them to the database or update them if they already exist.
+exports.findAllGithub = async (req, res) => {
+  var repos = await fetch('https://api.github.com/users/tylerkibble/repos');
+  console.log(repos)
+}

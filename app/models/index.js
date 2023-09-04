@@ -9,6 +9,6 @@ db.mongoose = mongoose;
 db.url = dbConfig.url;
 db.model = require("./model.js")(mongoose);
 db.todolist = require("./todolist.js")(mongoose);
-
+db.projects = require("./projects.js")(mongoose);
 
 module.exports = db;
