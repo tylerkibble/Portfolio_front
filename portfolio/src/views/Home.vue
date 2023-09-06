@@ -1,7 +1,14 @@
 <template>
-  <HelloWorld />
+<div>test</div>
+<home />
 </template>
+<script>
+import home from '../components/home.vue'
+export default {
+  component: {
+    home
+  }
+};
 
-<script lang="ts" setup>
-  import HelloWorld from '@/components/HelloWorld.vue'
 </script>
+<style scoped></style>
