@@ -23,7 +23,7 @@ app.use(cors()) // to allow cross origin requests
 app.use(bodyParser.json()) // to convert the request into JSON
 
 app.use(morgan("dev")); // configire morgan
-
+process.title = "myapp"
 
 mongoose
     .connect(process.env.DB_URL, {

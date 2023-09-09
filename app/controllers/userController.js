@@ -3,20 +3,22 @@ const db = require
 
 exports.registerNewUser = async (req, res) => {
     try {
-    console.log(req.body)
+    console.log("Req Body: ", req.body)
     let isUser = await User.findOne({ email: req.body.email });
-    console.log(isUser)
-    if (isUser.length >= 1) {
+    console.log("isUser: ", isUser)
+    
+    if (isUser) {
       return res.status(409).json({
         message: "email already in use"
       });
     }
+
     const user = new User({
       name: req.body.name,      
       password: req.body.password,
       email: req.body.email
     });
-    console.log(user)
+    console.log('User: ', user)
     let data = await user.save();
     const token = await user.generateAuthToken(); // here it is calling the method that we created in the model
     res.status(201).json({ data, token });

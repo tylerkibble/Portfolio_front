@@ -6,6 +6,7 @@
   "scripts": {
     "start:server": "node server.js --ignore './src/'",
     "start:src": "npm run dev --prefix './portfolio'",
+    "stop:server": "pkill --signal SIGINT myapp",
     "dev": "concurrently \"npm run start:server\" \"npm run start:src\""
   },
   "author": "",
