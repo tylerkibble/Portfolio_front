@@ -11,7 +11,7 @@ const limiter = rateLimit({
 
 
 
-router.get("/me", auth, limiter, userController.getUserDetails);
+router.get("/me", limiter, auth, userController.getUserDetails);
 
 router.post("/register", limiter, userController.registerNewUser);
 router.post("/login", limiter, userController.loginUser);
