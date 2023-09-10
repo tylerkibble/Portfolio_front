@@ -13,19 +13,28 @@ app.use(morgan("dev")); // configire morgan
 
 process.title = "myapp"
 
-app.get('/:path', function(req, res) {
-  let path = req.params.path;
+// set up rate limiter: maximum of five requests per minute
+var RateLimit = require('express-rate-limit');
+var limiter = RateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // max 100 requests per windowMs
+});
+
+// apply rate limiter to all requests
+app.use(limiter);
+
+app.get('/:path', function (req, res) {
+  let path = url.parse(req.url, true).query.path;
   if (isValidPath(path))
     res.sendFile(path);
 });
-
 mongoose
-    .connect(process.env.DB_URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
-    .then(() => console.log('MongoDB database Connected...'))
-    .catch((err) => console.log(err))
+  .connect(process.env.DB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log('MongoDB database Connected...'))
+  .catch((err) => console.log(err))
 
 const TodoListRoutes = require('./app/routes/api/todolist')
 app.use('/api/todolist', TodoListRoutes)
