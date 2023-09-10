@@ -4,7 +4,8 @@ const db = require
 exports.registerNewUser = async (req, res) => {
     try {
     console.log("Req Body: ", req.body)
-    let isUser = await User.findOne({ email: req.body.email });
+    let isUser = await User.findOne({ email: { $eq: req.body.email } } );
+    // let isUser = await User.findOne({ email: req.body.email });
     console.log("isUser: ", isUser)
     
     if (isUser) {
