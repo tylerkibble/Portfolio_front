@@ -1,15 +1,3 @@
-// const SwaggerUI = require('swagger-ui')
-// const swaggerUi = require('swagger-ui-express');
-// const swaggerJsdoc = require('swagger-jsdoc');
-// const swaggerDocument = require('./swagger.json');
-// const jsdoc = require('./app/config/jsdoc.js')
-// const swaggerJsdoc = require('swagger-jsdoc');
-// const swaggerSpec = swaggerJsdoc(options);
-// console.log(swaggerSpec)
-// const fs = require('fs');
-// fs.writeFileSync('./swagger.json', JSON.stringify(swaggerSpec, null, 2));
-// jsdoc;
-// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const mongoose = require('mongoose')
 const app = require('express')()
@@ -21,9 +9,15 @@ const morgan = require("morgan");
 
 app.use(cors()) // to allow cross origin requests
 app.use(bodyParser.json()) // to convert the request into JSON
-
 app.use(morgan("dev")); // configire morgan
+
 process.title = "myapp"
+
+app.get('/:path', function(req, res) {
+  let path = req.params.path;
+  if (isValidPath(path))
+    res.sendFile(path);
+});
 
 mongoose
     .connect(process.env.DB_URL, {

@@ -10,6 +10,7 @@ const limiter = rateLimit({
 });
 
 
+
 router.get("/me", auth, limiter, userController.getUserDetails);
 
 router.post("/register", limiter, userController.registerNewUser);
