@@ -37,6 +37,7 @@ import { ref } from 'vue';
 
 let repos = ref([]);
 let showCards = ref(false);
+
 async function getRepos() {
   const response = await fetch('https://api.github.com/users/tylerkibble/repos');
   const json = await response.json();
@@ -44,10 +45,13 @@ async function getRepos() {
   showCards.value = true;
   console.log(json)
 }
+
 const props = defineProps({
   repos: Array,
   showCards: Boolean,
 });
+getRepos();
+
 </script>
 
 <style>
